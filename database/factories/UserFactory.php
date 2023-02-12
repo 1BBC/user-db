@@ -23,7 +23,7 @@ class UserFactory extends Factory
             'name'  => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->regexify('^[\+]{0,1}380\d{9}$'),
-            'photo' => $this->faker->blankImage(Storage::path(User::PHOTO_PATH)),
+            'photo' => $this->faker->blankImage(User::photoPath()),
             'position_id' => Position::query()->inRandomOrder()->take(1)->value('id'),
         ];
     }

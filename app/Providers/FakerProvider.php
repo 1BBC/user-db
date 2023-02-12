@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Faker\Provider\Base as BaseProvider;
+use Illuminate\Support\Facades\Storage;
 use Nette\Utils\Image;
 
 class FakerProvider extends BaseProvider
@@ -24,7 +25,11 @@ class FakerProvider extends BaseProvider
             $color()
         );
         $file = uniqid().'.'.$type;
-        $path = str($dir)->finish('/').$file;
+        $path = str(Storage::path($dir))->finish('/').$file;
+
+        if (!Storage::exists($dir)) {
+            Storage::makeDirectory($dir);
+        }
 
         Image::fromBlank($width, $height, $rgb)->save($path);
 

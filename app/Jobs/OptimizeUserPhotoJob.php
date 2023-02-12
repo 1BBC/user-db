@@ -31,7 +31,7 @@ class OptimizeUserPhotoJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $path = Storage::path(\str(User::PHOTO_PATH)->finish('/') . $this->user->photo);
+        $path = Storage::path(\str(User::photoPath())->finish('/') . $this->user->photo);
 
         app(ImageOptimizeContract::class)->optimize(
             $path, $path, self::USER_PHOTO_WIDTH, self::USER_PHOTO_HEIGHT

@@ -16,7 +16,8 @@ class User extends Model
 {
     use HasFactory, Filterable;
 
-    const PHOTO_PATH = 'images/users';
+    protected const PHOTO_PATH = 'images/users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -53,6 +54,11 @@ class User extends Model
     {
         return (empty($this->photo))
             ? null
-            : Storage::url(\str(self::PHOTO_PATH)->finish('/').$this->photo);
+            : Storage::url(\str(self::photoPath())->finish('/').$this->photo);
+    }
+
+    public static function photoPath(): string
+    {
+        return self::PHOTO_PATH;
     }
 }

@@ -24,7 +24,7 @@ class StoreUserAction implements StoreUserActionContract
         }
 
         $user->photo = $file->storeAs(
-            User::PHOTO_PATH, uniqid().'.'.$file->getClientOriginalExtension()
+            User::photoPath(), uniqid().'.'.$file->getClientOriginalExtension()
         );
         $user->save();
 
